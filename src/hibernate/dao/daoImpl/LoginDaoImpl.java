@@ -64,7 +64,7 @@ public class LoginDaoImpl implements LoginDao {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			session.beginTransaction();
 			String hql = " from Login where userName=:name";
-			Login login = session.createQuery(hql,Login.class).uniqueResult();
+			Login login = session.createQuery(hql,Login.class).setParameter("name",userName).uniqueResult();
 			return login;
 		} catch (Exception e) {
 			e.printStackTrace();

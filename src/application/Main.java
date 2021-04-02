@@ -12,7 +12,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			pageName="home/Login";
+			//pageName="home/Login";
+			pageName="home/DashboardFrame";
+			//pageName="create/additem";
 			Parent root = FXMLLoader.load(getClass().getResource("/application/view/"+pageName+".fxml"));
 	 		Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

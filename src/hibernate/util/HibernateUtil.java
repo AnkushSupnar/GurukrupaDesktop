@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import hibernate.entities.Item;
 import hibernate.entities.Login;
 
 
@@ -35,6 +36,7 @@ public class HibernateUtil {
 
 				configuration.setProperties(setting);
 				configuration.addAnnotatedClass(Login.class);
+				configuration.addAnnotatedClass(Item.class);
 				
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
