@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import GuiUtil.AlertNotification;
 import hibernate.entities.Item;
-import hibernate.service.service.ItemService;
-import hibernate.service.serviceImpl.ItemServiceImpl;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.collections.FXCollections;
@@ -24,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import service.ItemService;
 public class AddItemController implements Initializable{
 	 	@FXML private AnchorPane mainPane;
 	    @FXML private TextField txtItemName;
@@ -60,7 +60,7 @@ public class AddItemController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		id=0;
-		itemService = new ItemServiceImpl();
+		itemService = new ItemService();
 		itemList.addAll(itemService.getAllItems());
 		metals.add("Gold");
 		metals.add("Silver");
@@ -150,6 +150,7 @@ public class AddItemController implements Initializable{
 			Item item = itemService.getItemById(table.getSelectionModel().getSelectedItem().getId());
 			if(item==null)
 			{
+				System.out.println("Not Found");
 				return;
 			}
 			txtItemName.setText(item.getItemName());
@@ -191,123 +192,122 @@ public class AddItemController implements Initializable{
 					Integer.parseInt(txtHsn.getText()));
 			item.setId(id);
 			System.out.println(item);
-			
-			int flag=itemService.saveItem(item);
-			if(flag==1)
-			{
-				
-				new Alert(AlertType.INFORMATION,"Item Save Success").showAndWait();
-				itemList.add(item);
-				
-				btnClear.fire();
-			}
-			if(flag==2)
-			{
-				new Alert(AlertType.INFORMATION,"Item Update Success").showAndWait();
-				int f=-1;
-				for(int i=0;i<itemList.size();i++)
-				{
-					if(itemList.get(i).getId()==item.getId())
-					{
-						f=i;
-						break;
+			if (item.getId() == 0) {
+				if (itemService.saveItem(item) != null) {
+					new AlertNotification().showSuccessMessage("Item Save Success");
+					itemList.add(item);
+					btnClear.fire();
+				} else
+					new AlertNotification().showErrorMessage("Error In Saving Item");
+			} else {
+				if (itemService.updateItem(item) != null) {
+					new AlertNotification().showSuccessMessage("Item Update Success");
+					int f = -1;
+					for (int i = 0; i < itemList.size(); i++) {
+						if (itemList.get(i).getId() == item.getId()) {
+							f = i;
+							break;
+						}
 					}
+					if (f != -1) {
+						itemList.remove(f);
+						itemList.add(f, item);
+					}
+					btnClear.fire();
 				}
-				if(f!=-1)
-				{
-					itemList.remove(f);
-					itemList.add(f, item);
-					System.out.println("Added");
-				}
-				//itemList.add(item);
-				
-				btnClear.fire();
 			}
-			
 		} catch (Exception e) {
-			new Alert(AlertType.ERROR,"Error in Saving Record!!!\n"+e.getMessage()).showAndWait();
+			new Alert(AlertType.ERROR, "Error in Saving Record!!!\n" + e.getMessage()).showAndWait();
 		}
-    }
-   
+	}
+
     private int validateData()
     {
     	try {
 			if(txtItemName.getText().equals(""))
 			{
-				new Alert(AlertType.ERROR,"Enter Item Name!!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item Name!!!");
 				txtItemName.requestFocus();
 				return 0;
-			}
-			if(itemService.getItemByName(txtItemName.getText().trim())!=null)
+			}		
+			int flag=0;
+			for(Item i:itemList)
 			{
-				new Alert(AlertType.ERROR,"Item Name Already Exist Enter Another One!!!").showAndWait();
-				txtItemName.requestFocus();
+				if(i.getItemName().equals(txtItemName.getText()))
+				{
+					flag=1;
+					break;
+				}
+			}
+			if(flag!=0 && id==0)
+			{
+				new AlertNotification().showErrorMessage("Item Name Already Exist!!!");
 				return 0;
 			}
 			if(txtMetal.getText().equals(""))
 			{
-				new Alert(AlertType.ERROR,"Enter Metal !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Metal !!!");
 				txtMetal.requestFocus();
 				return 0;
 			}
 			if(txtMetalWeight.getText().equals(""))
 			{
-				new Alert(AlertType.ERROR,"Enter Item Metal Weight !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item Metal Weight !!!");
 				txtMetalWeight.requestFocus();
 				return 0;
 			}
 			if(!isNumber(txtMetalWeight.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Item Weight in Digit !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item Weight in Digit !!!");
 				txtMetalWeight.requestFocus();
 				return 0;
 			}
 			if(txtOtherWeight.getText().equals("") || !isNumber(txtOtherWeight.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Other Weight in Digit").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Other Weight in Digit");
 				txtOtherWeight.requestFocus();
 				return 0;
 			}
 			if(txtNetWeight.getText().equals(""))
 			{
-				new Alert(AlertType.ERROR,"Enter Weight Again!!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Weight Again!!!");
 				txtMetalWeight.requestFocus();
 				return 0;
 			}
 			
 			if(txtUnit.getText().equals(""))
 			{
-				new Alert(AlertType.ERROR,"Enter Item Weight Unit !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item Weight Unit !!!");
 				txtUnit.requestFocus();
 				return 0;
 			}
 			if(txtPurity.getText().equals("")|| !isNumber(txtPurity.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Item Purity in Digit  !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item Purity in Digit  !!!");
 				txtPurity.requestFocus();
 				return 0;
 			}
 			if(txtHsn.getText().equals("") || !isNumber(txtHsn.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Item HSN Code in Digit !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Item HSN Code in Digit !!!");
 				txtHsn.requestFocus();
 				return 0;
 			}
 			if(txtLabour.getText().equals("") || !isNumber(txtLabour.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Labour Charges in Digit !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Labour Charges in Digit !!!");
 				txtLabour.requestFocus();
 				return 0;
 			}
 			if(txtOther.getText().equals("") || !isNumber(txtOther.getText()))
 			{
-				new Alert(AlertType.ERROR,"Enter Other Charges in Digit !!!").showAndWait();
+				new AlertNotification().showConfirmMessage("Enter Other Charges in Digit !!!");
 				txtOther.requestFocus();
 				return 0;
 			}
 			return 1;
 		} catch (Exception e) {
-			new Alert(AlertType.ERROR,"Error in Validating Fields "+e.getMessage()).showAndWait();
+			new AlertNotification().showConfirmMessage("Error in Validating Fields ");
 			return 0;
 		}
     }

@@ -15,7 +15,7 @@ public class CreateMenuController implements Initializable {
 	 	@FXML private AnchorPane mainPanel;
 	 	private ViewUtil viewUtil;
 	 	private BorderPane home;
-	 	private Pane addItem;
+	 	private Pane addItem,viewItems;
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			viewUtil = new ViewUtil();
@@ -23,6 +23,20 @@ public class CreateMenuController implements Initializable {
 
 		@FXML
 	    void btnAddItemAction(ActionEvent event) {
+			addItem = viewUtil.getPage("create/additem");
+	    	home = (BorderPane) mainPanel.getParent();
+	    	home.setCenter(addItem);
+	    	mainPanel.setVisible(false);
+	    }
+		@FXML
+	    void btnViewAllItemAction(ActionEvent event) {
+			viewItems = viewUtil.getPage("report/viewallitems");
+	    	home = (BorderPane) mainPanel.getParent();
+	    	home.setCenter(viewItems);
+	    	mainPanel.setVisible(false);
+	    }
+		@FXML
+	    void btnEditItemAction(ActionEvent event) {
 			addItem = viewUtil.getPage("create/additem");
 	    	home = (BorderPane) mainPanel.getParent();
 	    	home.setCenter(addItem);

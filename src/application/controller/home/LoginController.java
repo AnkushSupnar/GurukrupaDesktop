@@ -1,12 +1,13 @@
 package application.controller.home;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import GuiUtil.AlertNotification;
 import application.controller.util.ViewUtil;
 import hibernate.entities.Login;
-import hibernate.service.service.LoginService;
-import hibernate.service.serviceImpl.LoginServiceImpl;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.event.ActionEvent;
@@ -18,44 +19,81 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import service.CounterService;
+import service.LoginService;
 
 public class LoginController implements Initializable {
-	 @FXML
-	    private TextField txtUserName;
+	  	@FXML private AnchorPane mainWindow;
+	 	@FXML private TextField txtCountrName;
+		@FXML private TextField txtUserName;
+	    @FXML private PasswordField txtPassword;
+	    @FXML private Button btnLogin;
+	    @FXML private Button btnCancel;
+	    @FXML private Hyperlink linkAddCounter;
+	    @FXML private Hyperlink linkAddUser;
 
-	    @FXML
-	    private PasswordField txtPassword;
-
-	    @FXML
-	    private Button btnLogin;
-
-	    @FXML
-	    private Button btnCancel;
-	    @FXML
-	    private Hyperlink adduserLink;
-
-	    private LoginService service;
+	   
 	    private SuggestionProvider<String> userNameProvider;
-	  //  private ObservableList<String>nameList = FXCollections.observableArrayList();
+	    private SuggestionProvider<String> counterNameProvider;
+	    private List<String>counterNames = new ArrayList<>();
+	    private List<String>userNames = new ArrayList<>();
+	    private LoginService loginService;
+	    private CounterService counterService;
+	    private ViewUtil viewUtil;
+	  
 	    @Override
 		public void initialize(URL location, ResourceBundle resources) {
 	    	
-	    	service = new LoginServiceImpl();
-	    	userNameProvider = SuggestionProvider.create(service.getAllUserNames());
+	    	counterService = new CounterService();
+	    	loginService = new LoginService();
+	    	viewUtil = new ViewUtil();
+	    	userNames.addAll(loginService.getAllUserNames());
+	    	counterNames.addAll(counterService.getAllCounterNames());
+	    	if(counterNames.size()==0)
+	    	{
+	    		//linkAddCounter.fire();
+	    		new Alert(AlertType.ERROR,"No Counter Available Click on Add Counter Link").showAndWait();
+	    		//new AlertNotification().showErrorMessage("No Counter Available Click on Add Counter Link");
+	    		linkAddCounter.setVisible(true);
+	    		linkAddCounter.requestFocus();
+	    		return;
+	    	}
+	    	if(userNames.size()==0)
+	    	{	    		
+	    		new Alert(AlertType.ERROR,"No User Available Click on Add User Link").showAndWait();
+	    		linkAddUser.setVisible(true);
+	    		linkAddUser.requestFocus();
+	    		return;
+	    	}
+	    	
+	    	counterNameProvider = SuggestionProvider.create(counterNames);
+	    	new AutoCompletionTextFieldBinding<>(txtCountrName, counterNameProvider);	    	
+	    	userNameProvider = SuggestionProvider.create(userNames);
 	    	new AutoCompletionTextFieldBinding<>(txtUserName, userNameProvider);
 	    	
-	    	if(service.getAllUserNames().size()==0)
-	    	{
-	    		new Alert(AlertType.ERROR,"No User Found Click on Add User!!!").showAndWait();
-	    		adduserLink.setVisible(true);
-	    	}
+	    	
 		}
-	    
 	    @FXML
-	    void adduserLink(ActionEvent event) throws IOException {
-
-	    	new ViewUtil().changeWindow(event, "home/AddUserFrame");
+	    void addCounterAction(ActionEvent event) {
+	    	try {
+				viewUtil.changeWindow(event, "create/createcounter");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
+
+	    @FXML
+	    void addUserAction(ActionEvent event) {
+	    	try {
+				viewUtil.changeWindow(event, "create/adduser");
+			} catch (IOException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+	    }
+	    
 	    @FXML
 	    void btnCancelAction(ActionEvent event) {
 
@@ -76,7 +114,7 @@ public class LoginController implements Initializable {
 					txtPassword.requestFocus();
 					return;
 				}
-				Login login = service.getLoginByName(txtUserName.getText());
+				Login login = loginService.getLoginByName(txtUserName.getText());
 				if(!login.getPassword().equals(txtPassword.getText()))
 				{
 					new Alert(AlertType.ERROR,"Wron Password!!!").showAndWait();
@@ -87,8 +125,7 @@ public class LoginController implements Initializable {
 				new ViewUtil().changeWindow(event, "home/DashboardFrame");
 			} catch (Exception e) {
 				e.printStackTrace();
-				new Alert(AlertType.ERROR,"Error "+e.getMessage()).showAndWait();
-				
+				new Alert(AlertType.ERROR,"Error "+e.getMessage()).showAndWait();				
 			}
 	    }
 

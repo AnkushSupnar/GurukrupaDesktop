@@ -1,24 +1,12 @@
 package hibernate.entities;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Item {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	String itemName;
 	String metal;
 	double metalWeight;
 	double otherWeight;
 	String weightUnit;
-	@Column(nullable = true)
 	double labourChareges;
-	@Column(nullable = true)
 	double otherCharges;
 	double purity;
 	int hsn;
@@ -98,10 +86,7 @@ public class Item {
 	public void setHsn(int hsn) {
 		this.hsn = hsn;
 	}
-	public double getNetWeight()
-	{
-		return metalWeight+otherWeight;
-	}
+	
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", itemName=" + itemName + ", metal=" + metal + ", metalWeight=" + metalWeight

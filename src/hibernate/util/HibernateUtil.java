@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import hibernate.entities.Counter;
 import hibernate.entities.Item;
 import hibernate.entities.Login;
 
@@ -35,9 +36,9 @@ public class HibernateUtil {
 				
 
 				configuration.setProperties(setting);
-				configuration.addAnnotatedClass(Login.class);
+				//configuration.addAnnotatedClass(Login.class);
 				configuration.addAnnotatedClass(Item.class);
-				
+				//configuration.addAnnotatedClass(Counter.class);
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();

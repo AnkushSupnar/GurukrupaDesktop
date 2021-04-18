@@ -46,7 +46,7 @@
                   <FontAwesomeIcon fill="WHITE" glyphName="DIAMOND" />
                </graphic>
             </Button>
-            <Button layoutX="31.0" layoutY="100.0" mnemonicParsing="false" text="Edit Item">
+            <Button layoutX="31.0" layoutY="100.0" mnemonicParsing="false" onAction="#btnEditItemAction" text="Edit Item">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -54,7 +54,7 @@
                   <FontAwesomeIcon fill="WHITE" glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button layoutX="31.0" layoutY="140.0" mnemonicParsing="false" text="All Item">
+            <Button layoutX="31.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnViewAllItemAction" text="All Item">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
