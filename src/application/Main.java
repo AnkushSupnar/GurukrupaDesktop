@@ -13,10 +13,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			pageName="home/Login";
-			pageName="home/DashboardFrame";
+			//pageName="home/DashboardFrame";
 			//pageName="create/additem";
 			//pageName="create/createcounter";
 			//pageName="create/adduser";
+			//pageName="create/AddCustomer";
 			Parent root = FXMLLoader.load(getClass().getResource("/application/view/"+pageName+".fxml"));
 	 		Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

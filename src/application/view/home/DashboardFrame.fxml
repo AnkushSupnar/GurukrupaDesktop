@@ -135,8 +135,8 @@
                         <DropShadow color="#b9b6b6" />
                      </effect>
                   </TextField>
-                  <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="592.0" layoutY="60.0" size="30" AnchorPane.rightAnchor="105.0" />
-                  <Text fill="WHITE" layoutX="619.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" wrappingWidth="100.763671875" AnchorPane.rightAnchor="0.0">
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="740.4285697937012" layoutY="60.0" size="30" AnchorPane.rightAnchor="117.00000190734863" />
+                  <Text fx:id="txtUserName" fill="WHITE" layoutX="769.58203125" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" wrappingWidth="100.763671875" AnchorPane.rightAnchor="10.654296875">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>

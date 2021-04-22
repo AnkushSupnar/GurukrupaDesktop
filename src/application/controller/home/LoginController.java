@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import GuiUtil.AlertNotification;
+import application.controller.util.CommonData;
 import application.controller.util.ViewUtil;
 import hibernate.entities.Login;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
@@ -22,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import service.CounterService;
 import service.LoginService;
+import service.ServiceUtil;
 
 public class LoginController implements Initializable {
 	  	@FXML private AnchorPane mainWindow;
@@ -50,6 +52,12 @@ public class LoginController implements Initializable {
 	    	viewUtil = new ViewUtil();
 	    	userNames.addAll(loginService.getAllUserNames());
 	    	counterNames.addAll(counterService.getAllCounterNames());
+	    	if(!loginService.checkConnrction().equals("Connected"))
+	    	{
+	    		new Alert(AlertType.ERROR,"API Not Connected Pease Check Your Connection").showAndWait();
+	    		return;
+	    	}
+	    	
 	    	if(counterNames.size()==0)
 	    	{
 	    		//linkAddCounter.fire();
@@ -71,7 +79,7 @@ public class LoginController implements Initializable {
 	    	new AutoCompletionTextFieldBinding<>(txtCountrName, counterNameProvider);	    	
 	    	userNameProvider = SuggestionProvider.create(userNames);
 	    	new AutoCompletionTextFieldBinding<>(txtUserName, userNameProvider);
-	    	
+	    	txtCountrName.requestFocus();
 	    	
 		}
 	    @FXML
@@ -121,7 +129,8 @@ public class LoginController implements Initializable {
 					txtPassword.requestFocus();
 					return;
 				}
-				new Alert(AlertType.INFORMATION,"Login Success").show();
+				new AlertNotification().showSuccessMessage("Login Success");
+				CommonData.login = login;
 				new ViewUtil().changeWindow(event, "home/DashboardFrame");
 			} catch (Exception e) {
 				e.printStackTrace();

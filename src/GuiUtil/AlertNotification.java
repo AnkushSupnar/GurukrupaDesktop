@@ -13,9 +13,9 @@ public class AlertNotification {
 	{
 		// /GurukrupaJewellors/src/resources/checked.png
 		try {
-		//Image img = new Image(new FileInputStream("D:\\Gurukrupa Jewellors\\icon\\checked.png"));
+		
 		Notifications message = Notifications.create()
-				.title("Success")				
+				.title("Success")					
 				.text(msg)
 				.hideAfter(Duration.seconds(5))
 				.position(Pos.TOP_LEFT)

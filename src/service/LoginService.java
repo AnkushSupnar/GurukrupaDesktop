@@ -1,10 +1,6 @@
 package service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.http.HttpResponse;
 import java.util.List;
 
@@ -17,6 +13,19 @@ import hibernate.entities.Login;
 public class LoginService {
 	HttpResponse<String> response;
 
+	public String checkConnrction()
+	{
+		String url = "http://localhost:8080/api";
+		response = ServiceUtil.callRestApiGet(url);
+		if(response.statusCode()==200)
+		{
+			return response.body();
+		}
+		else
+		{
+			return "not connected";
+		}
+	}
 	public Login getLoginById(int id) {
 		try {
 			String url = "http://localhost:8080/api/logins/byid/" + id;

@@ -1,28 +1,28 @@
 package hibernate.entities;
 public class Item {
-	long id;
-	String itemName;
+	long id;	
+	String itemname;
 	String metal;
-	double metalWeight;
-	double otherWeight;
-	String weightUnit;
-	double labourChareges;
-	double otherCharges;
+	double metalweight;
+	double otherweight;
+	String weightunit;
+	double labouruchareges;
+	double othercharges;
 	double purity;
 	int hsn;
 	public Item() {
 		super();
 	}
-	public Item(String itemName, String metal, double metalWeight, double otherWeight, String weightUnit,
-			double labourChareges, double otherCharges, double purity, int hsn) {
+	public Item(String itemname, String metal, double metalweight, double otherweight, String weightunit,
+			double labouruchareges, double othercharges, double purity, int hsn) {
 		super();
-		this.itemName = itemName;
+		this.itemname = itemname;
 		this.metal = metal;
-		this.metalWeight = metalWeight;
-		this.otherWeight = otherWeight;
-		this.weightUnit = weightUnit;
-		this.labourChareges = labourChareges;
-		this.otherCharges = otherCharges;
+		this.metalweight = metalweight;
+		this.otherweight = otherweight;
+		this.weightunit = weightunit;
+		this.labouruchareges = labouruchareges;
+		this.othercharges = othercharges;
 		this.purity = purity;
 		this.hsn = hsn;
 	}
@@ -32,11 +32,11 @@ public class Item {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getItemName() {
-		return itemName;
+	public String getItemname() {
+		return itemname;
 	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
 	}
 	public String getMetal() {
 		return metal;
@@ -44,35 +44,35 @@ public class Item {
 	public void setMetal(String metal) {
 		this.metal = metal;
 	}
-	public double getMetalWeight() {
-		return metalWeight;
+	public double getMetalweight() {
+		return metalweight;
 	}
-	public void setMetalWeight(double metalWeight) {
-		this.metalWeight = metalWeight;
+	public void setMetalweight(double metalweight) {
+		this.metalweight = metalweight;
 	}
-	public double getOtherWeight() {
-		return otherWeight;
+	public double getOtherweight() {
+		return otherweight;
 	}
-	public void setOtherWeight(double otherWeight) {
-		this.otherWeight = otherWeight;
+	public void setOtherweight(double otherweight) {
+		this.otherweight = otherweight;
 	}
-	public String getWeightUnit() {
-		return weightUnit;
+	public String getWeightunit() {
+		return weightunit;
 	}
-	public void setWeightUnit(String weightUnit) {
-		this.weightUnit = weightUnit;
+	public void setWeightunit(String weightunit) {
+		this.weightunit = weightunit;
 	}
-	public double getLabourChareges() {
-		return labourChareges;
+	public double getLabouruchareges() {
+		return labouruchareges;
 	}
-	public void setLabourChareges(double labourChareges) {
-		this.labourChareges = labourChareges;
+	public void setLabouruchareges(double labouruchareges) {
+		this.labouruchareges = labouruchareges;
 	}
-	public double getOtherCharges() {
-		return otherCharges;
+	public double getOthercharges() {
+		return othercharges;
 	}
-	public void setOtherCharges(double otherCharges) {
-		this.otherCharges = otherCharges;
+	public void setOthercharges(double othercharges) {
+		this.othercharges = othercharges;
 	}
 	public double getPurity() {
 		return purity;
@@ -86,12 +86,11 @@ public class Item {
 	public void setHsn(int hsn) {
 		this.hsn = hsn;
 	}
-	
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", itemName=" + itemName + ", metal=" + metal + ", metalWeight=" + metalWeight
-				+ ", otherWeight=" + otherWeight + ", weightUnit=" + weightUnit + ", labourChareges=" + labourChareges
-				+ ", otherCharges=" + otherCharges + ", purity=" + purity + ", hsn=" + hsn + "]";
+		return "Item [id=" + id + ", itemname=" + itemname + ", metal=" + metal + ", metalweight=" + metalweight
+				+ ", otherweight=" + otherweight + ", weightunit=" + weightunit + ", labouruchareges=" + labouruchareges
+				+ ", othercharges=" + othercharges + ", purity=" + purity + ", hsn=" + hsn + "]";
 	}
 	
 }

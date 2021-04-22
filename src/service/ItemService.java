@@ -1,8 +1,10 @@
 package service;
 
+import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -79,23 +81,35 @@ public class ItemService {
 	}
 	public Item saveItem(Item item)
 	{
-		try {
-			url = "http://localhost:8080/api/items";
-			String json = JsonUtil.convertFromObjectToJson(item);
-			response = ServiceUtil.callRestApiPost(url, json);
-			if(response.statusCode()==200)
-			{
-				return JsonUtil.convertFromJsonToObject(response.body(), Item.class);
-			}
-			else
-			{
+		
+			url = "http://localhost:8080/api/items/save";
+			try {
+				String json = JsonUtil.convertFromObjectToJson(item);
+				response = ServiceUtil.callRestApiPost(url, json);
+				if(response.statusCode()==200)
+				{
+			
+					return JsonUtil.convertFromJsonToObject(response.body(),Item.class);
+				}
+				else {
+					System.out.println("Json Value=\n"+response.body());
+					return null;
+				}
+				
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 				return null;
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		
 	
 	}
 	public Item updateItem(Item item)

@@ -70,14 +70,14 @@ public class AddItemController implements Initializable{
 		
 		 	 colSrNo.setCellValueFactory(new PropertyValueFactory<>("id"));
 		     colHsn.setCellValueFactory(new PropertyValueFactory<>("hsn"));
-		     colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+		     colItemName.setCellValueFactory(new PropertyValueFactory<>("itemname"));
 		     colMetal.setCellValueFactory(new PropertyValueFactory<>("metal"));
-		     colMetalWeight.setCellValueFactory(new PropertyValueFactory<>("metalWeight"));
-		     colOtherWeight.setCellValueFactory(new PropertyValueFactory<>("otherWeight"));
-		     colUnit.setCellValueFactory(new PropertyValueFactory<>("weightUnit"));
+		     colMetalWeight.setCellValueFactory(new PropertyValueFactory<>("metalweight"));
+		     colOtherWeight.setCellValueFactory(new PropertyValueFactory<>("otherweight"));
+		     colUnit.setCellValueFactory(new PropertyValueFactory<>("weightunit"));
 		     colPurity.setCellValueFactory(new PropertyValueFactory<>("purity"));
-		     colLabourCharge.setCellValueFactory(new PropertyValueFactory<>("labourChareges"));
-		     colOtherCharge.setCellValueFactory(new PropertyValueFactory<>("otherCharges"));
+		     colLabourCharge.setCellValueFactory(new PropertyValueFactory<>("labourchareges"));
+		     colOtherCharge.setCellValueFactory(new PropertyValueFactory<>("othercharges"));
 	     
 	     table.setItems(itemList);
 	}
@@ -153,16 +153,16 @@ public class AddItemController implements Initializable{
 				System.out.println("Not Found");
 				return;
 			}
-			txtItemName.setText(item.getItemName());
+			txtItemName.setText(item.getItemname());
 			txtMetal.setText(item.getMetal());
-			txtUnit.setText(item.getWeightUnit());
-			txtLabour.setText(""+item.getLabourChareges());
-			txtOther.setText(""+item.getOtherCharges());
+			txtUnit.setText(item.getWeightunit());
+			txtLabour.setText(""+item.getLabouruchareges());
+			txtOther.setText(""+item.getOthercharges());
 			txtHsn.setText(""+item.getHsn());
-			txtMetalWeight.setText(""+item.getMetalWeight());
-			txtNetWeight.setText(""+(item.getMetalWeight()+item.getOtherWeight()));
+			txtMetalWeight.setText(""+item.getMetalweight());
+			txtNetWeight.setText(""+(item.getMetalweight()+item.getOtherweight()));
 			txtPurity.setText(""+item.getPurity());
-			txtOtherWeight.setText(""+item.getOtherWeight());
+			txtOtherWeight.setText(""+item.getOtherweight());
 			id = item.getId();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -181,6 +181,8 @@ public class AddItemController implements Initializable{
 			{
 				return;
 			}
+			//Item(String itemName, String metal, double metalWeight, double otherWeight, String weightUnit,
+				//	double labourChareges, double otherCharges, double purity, int hsn)
 			Item item = new Item(txtItemName.getText(),
 					txtMetal.getText(),
 					Double.parseDouble(txtMetalWeight.getText()),
@@ -193,9 +195,11 @@ public class AddItemController implements Initializable{
 			item.setId(id);
 			System.out.println(item);
 			if (item.getId() == 0) {
-				if (itemService.saveItem(item) != null) {
+				Item i =itemService.saveItem(item) ;
+				if ( i!= null) {
+					System.out.println("From Ui\n"+i);
 					new AlertNotification().showSuccessMessage("Item Save Success");
-					itemList.add(item);
+					itemList.add(i);
 					btnClear.fire();
 				} else
 					new AlertNotification().showErrorMessage("Error In Saving Item");
@@ -233,7 +237,7 @@ public class AddItemController implements Initializable{
 			int flag=0;
 			for(Item i:itemList)
 			{
-				if(i.getItemName().equals(txtItemName.getText()))
+				if(i.getItemname().equals(txtItemName.getText()))
 				{
 					flag=1;
 					break;
