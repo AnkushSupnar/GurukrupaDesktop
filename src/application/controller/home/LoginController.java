@@ -23,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import service.CounterService;
 import service.LoginService;
-import service.ServiceUtil;
 
 public class LoginController implements Initializable {
 	  	@FXML private AnchorPane mainWindow;

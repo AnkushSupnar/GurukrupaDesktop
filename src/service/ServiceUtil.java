@@ -1,10 +1,8 @@
 package service;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -16,20 +14,28 @@ public class ServiceUtil {
 	public static HttpRequest request;
 
 	public static HttpResponse<String> callRestApiGet(String url){
-	   // url = url.replaceAll(" ", "%20");
-	    System.out.println("Got in Service util chages "+url);
-		//request = HttpRequest.newBuilder().GET().uri(URI.create(url)).build();
-		request =HttpRequest.newBuilder(URI.create(url))
-				.header("Content-Type", "application/json")
-				.GET().build();
-		response = null;
 		try {
+	   
+	    System.out.println("Got in Service util chages "+url);
+//		request =HttpRequest.newBuilder(URI.create(url))
+//				.header("Content-Type", "application/json")
+//				.GET().build();
+	    request = HttpRequest.newBuilder(new URI(url)).
+	    		header("Content-Type", "application/json").
+	    		GET().build();
+		response = null;
+		
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			return response;
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			return null;
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return null;
 		}
-		return response;
+		
+		
 	}
 	
 	public static HttpResponse<String> callRestApiPost(String url,String inputJson)

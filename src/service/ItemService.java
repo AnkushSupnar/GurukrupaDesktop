@@ -68,7 +68,8 @@ public class ItemService {
 	public Item getItemByName(String name)
 	{
 		try {
-			url = "http://localhost:8080/api/items/getbyname/"+name;
+			name = name.replace(" ", "%20");
+			url = "http://localhost:8080/api/items/byname/"+name;
 			response = ServiceUtil.callRestApiGet(url);
 			if(response.statusCode()==200) 
 			return  objectMapper.readValue(response.body(), Item.class);

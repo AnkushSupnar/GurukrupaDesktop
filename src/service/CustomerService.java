@@ -31,8 +31,7 @@ public class CustomerService {
 			url = "http://localhost:8080/api/customers/allnames";
 			response = ServiceUtil.callRestApiGet(url);
 			if (response.statusCode() == 200)
-				return JsonUtil.convertFromJsonToList(response.body(), new TypeReference<List<String>>() {
-				});
+				return JsonUtil.convertFromJsonToList(response.body(), new TypeReference<List<String>>() {});
 			else
 				return null;
 		} catch (Exception e) {
@@ -44,6 +43,17 @@ public class CustomerService {
 	public Customer getCuatomerById(long id) {
 		try {
 			url = "http://localhost:8080/api/customers/byid/" + id;
+			return JsonUtil.convertFromJsonToObject(ServiceUtil.callRestApiGet(url).body(), Customer.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public Customer getCustomerByName(String name)
+	{
+		try {
+			name = name.replace(" ","%20");
+			url = "http://localhost:8080/api/customers/byname/"+name;
 			return JsonUtil.convertFromJsonToObject(ServiceUtil.callRestApiGet(url).body(), Customer.class);
 		} catch (Exception e) {
 			e.printStackTrace();

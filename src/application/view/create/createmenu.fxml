@@ -57,7 +57,7 @@
                               <FontAwesomeIcon fill="WHITE" glyphName="DIAMOND" />
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#btnEditItemAction" text="Edit Item">
+                        <Button mnemonicParsing="false" onAction="#btnAddItemAction" text="Edit Item">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -85,18 +85,18 @@
                   <DropShadow />
                </effect>
                <children>
-                  <FontAwesomeIcon fill="WHITE" glyphName="DIAMOND" layoutX="82.0" layoutY="48.0" size="40" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="BANK" layoutX="82.0" layoutY="48.0" size="40" />
                   <VBox layoutX="31.0" layoutY="67.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Add Item">
+                        <Button mnemonicParsing="false" onAction="#btnAddBankAction" text="Add Bank">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon fill="WHITE" glyphName="DIAMOND" />
+                              <FontAwesomeIcon fill="WHITE" glyphName="BANK" />
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" text="Edit Item">
+                        <Button mnemonicParsing="false" onAction="#btnAddBankAction" text="Edit Bank">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -104,7 +104,7 @@
                               <FontAwesomeIcon fill="WHITE" glyphName="EDIT" />
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" text="All Item">
+                        <Button mnemonicParsing="false" text="All Banks">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -133,6 +133,14 @@
                            </font>
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Edit Customer">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EDIT" />
                            </graphic>
                         </Button>
                         <Button mnemonicParsing="false" text="List Customer">

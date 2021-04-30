@@ -45,7 +45,8 @@ public class DashboardController implements Initializable {
 
 	    @FXML
 	    void menuTransactionAction(ActionEvent event) {
-
+	    	transactionPane = viewUtil.getPage("transaction/transactionMenu");
+	    	mainPane.setCenter(transactionPane);
 	    }
 	 
    

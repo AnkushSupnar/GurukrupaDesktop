@@ -18,6 +18,8 @@ public class Main extends Application {
 			//pageName="create/createcounter";
 			//pageName="create/adduser";
 			//pageName="create/AddCustomer";
+			//pageName="create/AddBank";
+			pageName="transaction/Billing";
 			Parent root = FXMLLoader.load(getClass().getResource("/application/view/"+pageName+".fxml"));
 	 		Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

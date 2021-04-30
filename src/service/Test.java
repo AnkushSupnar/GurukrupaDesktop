@@ -1,12 +1,15 @@
 package service;
 
-import hibernate.entities.Login;
-
 public class Test {
 	public static void main(String[] args) {
-		LoginService service = new LoginService();
-		Login login = service.getLoginByName("Ankush%20Supnar");
-		System.out.println(login);
+		CustomerService service = new CustomerService();
+		String name = "Ankush Sawaleram Supnar";
+		name = name.replace(" ", "%20");
+		System.out.println(name);
+		System.out.println("got "+service.getCustomerByName(name));
+		
+		ItemService itemService = new ItemService();
+		System.out.println("Got item="+itemService.getItemByName("Gold Ring"));
 		
 	}
 }

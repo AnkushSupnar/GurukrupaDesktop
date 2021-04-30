@@ -15,7 +15,7 @@ public class CreateMenuController implements Initializable {
 	 	@FXML private AnchorPane mainPanel;
 	 	private ViewUtil viewUtil;
 	 	private BorderPane home;
-	 	private Pane addItem,viewItems,addCustomer;
+	 	private Pane addItem,viewItems,addCustomer,addBank;
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			viewUtil = new ViewUtil();
@@ -26,27 +26,29 @@ public class CreateMenuController implements Initializable {
 			addItem = viewUtil.getPage("create/additem");
 	    	home = (BorderPane) mainPanel.getParent();
 	    	home.setCenter(addItem);
-	    	mainPanel.setVisible(false);
+	    	//mainPanel.setVisible(false);
 	    }
 		@FXML
 	    void btnViewAllItemAction(ActionEvent event) {
 			viewItems = viewUtil.getPage("report/viewallitems");
 	    	home = (BorderPane) mainPanel.getParent();
 	    	home.setCenter(viewItems);
-	    	mainPanel.setVisible(false);
+	    	//mainPanel.setVisible(false);
 	    }
+		
 		@FXML
-	    void btnEditItemAction(ActionEvent event) {
-			addItem = viewUtil.getPage("create/additem");
-	    	home = (BorderPane) mainPanel.getParent();
-	    	home.setCenter(addItem);
-	    	mainPanel.setVisible(false);
-	    }
-		 @FXML
-		    void btnAddCustomerAction(ActionEvent event) {
-			 addCustomer = viewUtil.getPage("create/AddCustomer");
-				home = (BorderPane) mainPanel.getParent();
-				home.setCenter(addCustomer);
-				mainPanel.setVisible(false);
-		    }
-}
+		void btnAddCustomerAction(ActionEvent event) {
+			addCustomer = viewUtil.getPage("create/AddCustomer");
+			home = (BorderPane) mainPanel.getParent();
+			home.setCenter(addCustomer);
+			//mainPanel.setVisible(false);
+		}
+
+		@FXML
+		void btnAddBankAction(ActionEvent event) {
+			addBank = viewUtil.getPage("create/AddBank");
+			home = (BorderPane) mainPanel.getParent();
+			home.setCenter(addBank);
+			//mainPanel.setVisible(false);
+		}
+	}
