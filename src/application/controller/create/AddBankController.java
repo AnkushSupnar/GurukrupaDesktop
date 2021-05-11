@@ -3,10 +3,8 @@ package application.controller.create;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
-
 import GuiUtil.AlertNotification;
 import hibernate.entities.Bank;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;

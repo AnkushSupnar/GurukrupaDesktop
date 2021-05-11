@@ -124,7 +124,7 @@
                   <Label layoutX="17.0" layoutY="272.0" styleClass="label1" text="Labour Chrgs" />
                   <HBox layoutX="17.0" layoutY="293.0">
                      <children>
-                        <TextField fx:id="txtLabourCharges" prefHeight="30.0" prefWidth="80.0" styleClass="info">
+                        <TextField fx:id="txtLabourCharges" editable="false" prefHeight="30.0" prefWidth="80.0" styleClass="info">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -132,7 +132,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtOtherCharges" prefHeight="30.0" prefWidth="80.0" styleClass="info">
+                        <TextField fx:id="txtOtherCharges" editable="false" prefHeight="30.0" prefWidth="80.0" styleClass="info">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -199,7 +199,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="UPDATE">
+                        <Button mnemonicParsing="false" onAction="#btnUpdateAction" styleClass="button1" text="UPDATE">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -210,7 +210,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="REMOVE">
+                        <Button mnemonicParsing="false" onAction="#btnRemoveAction" styleClass="button1" text="REMOVE">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -303,32 +303,38 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Pane layoutX="233.0" layoutY="564.0" AnchorPane.bottomAnchor="53.0">
+                  <Pane layoutX="8.0" layoutY="562.0" prefHeight="71.0" prefWidth="616.0" AnchorPane.bottomAnchor="53.0">
                      <children>
-                        <Label layoutY="44.0" styleClass="label1" text="Tax GST" />
-                        <TextField layoutX="77.0" layoutY="39.0" prefHeight="30.0" prefWidth="100.0">
+                        <Label layoutX="284.0" layoutY="-2.0" styleClass="label1" text="Discount   -" />
+                        <TextField fx:id="txtDiscount" layoutX="284.0" layoutY="18.0" prefHeight="30.0" prefWidth="100.0" text="0.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Label layoutY="9.0" styleClass="label1" text="Discount" />
-                        <TextField layoutX="77.0" layoutY="1.0" prefHeight="30.0" prefWidth="100.0">
+                        <Label layoutX="449.0" layoutY="5.0" styleClass="label1" text="Net Total" />
+                        <TextField fx:id="txtNetTotal" editable="false" layoutX="513.0" prefHeight="30.0" prefWidth="100.0" text="0.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="227.0" layoutY="5.0" styleClass="label1" text="Net Total" />
-                        <TextField layoutX="291.0" prefHeight="30.0" prefWidth="100.0">
+                        <Label layoutX="436.0" layoutY="38.0" styleClass="label1" text="Grand Total" />
+                        <TextField fx:id="txtGrandTotal" editable="false" layoutX="513.0" layoutY="39.0" prefHeight="30.0" prefWidth="100.0" text="0.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="214.0" layoutY="38.0" styleClass="label1" text="Grand Total" />
-                        <TextField layoutX="291.0" layoutY="39.0" prefHeight="30.0" prefWidth="100.0">
+                        <TextField fx:id="txtCGST" editable="false" layoutX="177.0" layoutY="19.0" prefHeight="30.0" prefWidth="100.0" text="0.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
+                        <Label layoutX="174.0" layoutY="-2.0" styleClass="label1" text=" CGST 1.5%" />
+                        <TextField fx:id="txtGst" layoutX="69.0" layoutY="18.0" prefHeight="30.0" prefWidth="100.0" text="0.0">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="71.0" layoutY="-1.0" styleClass="label1" text=" GST 1.5%" />
                      </children>
                   </Pane>
                </children></AnchorPane>

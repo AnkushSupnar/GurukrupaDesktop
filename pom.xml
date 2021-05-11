@@ -1,12 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ankush</groupId>
-  <artifactId>GurukrupaJewellors</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>GurukrupaJewellors</name>
-  <description>GurukrupaJewellors Management System</description>
-  
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ankush</groupId>
+	<artifactId>GurukrupaJewellors</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>GurukrupaJewellors</name>
+	<description>GurukrupaJewellors Management System</description>
+
+	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -37,6 +39,35 @@
 			<version>8.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-bom</artifactId>
+			<version>12.2.0</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx -->
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-javafx</artifactId>
+			<version>12.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-fontawesome5-pack</artifactId>
+			<version>12.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-dashicons-pack</artifactId>
+			<version>12.2.0</version>
+		</dependency>
+
+
+
+
+
+
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -49,8 +80,9 @@
 			<artifactId>sl4j</artifactId>
 			<version>1.0.13.5</version>
 		</dependency>
-
-
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls <dependency> 
+			<groupId>org.openjfx</groupId> <artifactId>javafx-controls</artifactId> <version>17-ea+9</version> 
+			</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
 		<dependency>
@@ -58,6 +90,7 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>11</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-media</artifactId>
@@ -83,23 +116,23 @@
 			<artifactId>controlsfx</artifactId>
 			<version>11.0.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
-<dependency>
-	<groupId>com.jfoenix</groupId>
-	<artifactId>jfoenix</artifactId>
-	<version>9.0.10</version>
-</dependency>
-		
-<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.12.2</version>
-</dependency>
+		<dependency>
+			<groupId>com.jfoenix</groupId>
+			<artifactId>jfoenix</artifactId>
+			<version>9.0.10</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.2</version>
+		</dependency>
 
 	</dependencies>
-  <build>
+	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>

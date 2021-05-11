@@ -67,6 +67,12 @@ public class BillingController implements Initializable {
 	    @FXML private TableColumn<TransactionReport,Double> colAmount;
 	    
 	    @FXML private Button btnClear;
+	    @FXML private TextField txtGst;
+	    @FXML private TextField txtCGST;
+	    @FXML private TextField txtDiscount;
+	    @FXML private TextField txtNetTotal;
+	    @FXML private TextField txtGrandTotal;
+
 
 	 private CustomerService customerService;
 	 private ItemService itemService;
@@ -132,6 +138,27 @@ public class BillingController implements Initializable {
 			}
 
 		});
+		txtDiscount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                	txtDiscount.setText(oldValue);
+                }
+            }
+        });
+		txtDiscount.setOnAction(event -> {
+			if (!txtDiscount.getText().equals("") || isNumber(txtDiscount.getText())) {
+				if (!txtDiscount.getText().equals("") || isNumber(txtDiscount.getText())) {
+						txtGrandTotal.setText(""+(
+								Double.parseDouble(txtCGST.getText())+
+								Double.parseDouble(txtCGST.getText())+
+								Double.parseDouble(txtNetTotal.getText())-
+								Double.parseDouble(txtDiscount.getText())
+								));
+				}
+			}
+
+		});
 
 	}
 	
@@ -191,6 +218,8 @@ public class BillingController implements Initializable {
 	    }
 	    @FXML
 	    void btnClearItemAction(ActionEvent event) {
+	    	txtItemName.setText("");
+	    	txtCustomerInfo.setText("");
 
 	    }
 	    @FXML
@@ -251,7 +280,7 @@ public class BillingController implements Initializable {
 	    		
 	    		}
 	    	}
-	    	
+	    	calculateGrandTotal();
 	    	
 	    }
 	    @FXML
@@ -265,14 +294,50 @@ public class BillingController implements Initializable {
 	    	txtLabourCharges.setText("");
 	    	txtOtherCharges.setText("");
 	    	txtRate.setText("");
-	    	txtQty.setText("");
-	    	txtAmount.setText("");
+	    	txtQty.setText(""+1);
+	    	txtAmount.setText(""+0.0);
 	    	txtTotalCharges.setText("");
 	    	trid = trList.size()+1;
 	    }
-
+	    @FXML
+	    void btnUpdateAction(ActionEvent event) {
+	    	try {
+				if(table.getSelectionModel().getSelectedItem()==null)
+				{
+					return;
+				}
+				TransactionReport treport = table.getSelectionModel().getSelectedItem();
+				if(treport==null)
+					return;
+				Item item = itemService.getItemByName(treport.getName());
+				setItemProperties(item);
+				txtRate.setText(""+treport.getRate());
+				txtQty.setText(""+treport.getQty());
+				
+			} catch (Exception e) {
+				message.showErrorMessage("Error in Updating "+e.getMessage());
+			}
+	    }
+	    @FXML
+	    void btnRemoveAction(ActionEvent event) {
+	    	if(table.getSelectionModel().getSelectedIndex()==-1)
+	    	{
+	    		return;
+	    	}
+	    	trList.remove(table.getSelectionModel().getSelectedIndex());
+	    	int sr=0;
+	    	double netamount=0;
+	    	for(int i=0;i<trList.size();i++)
+	    	{
+	    		trList.get(i).setId(++sr);
+	    		netamount+=trList.get(i).getAmount();
+	    	}
+	    	txtNetTotal.setText(""+netamount);
+	    	calculateGrandTotal();
+	    }
 	    void setItemProperties(Item item)
 	    {
+	    	txtItemName.setText(item.getItemname());
 	    	txtMetal.setText(item.getMetal());
 	    	txtPurity.setText(""+item.getPurity());
 	    	txtMetalWeight.setText(""+item.getMetalweight());
@@ -281,6 +346,27 @@ public class BillingController implements Initializable {
 	    	txtLabourCharges.setText(""+item.getLabouruchareges());
 	    	txtOtherCharges.setText(""+item.getOthercharges());
 	    	txtTotalCharges.setText(""+(item.getLabouruchareges()+item.getOthercharges()));
+	    }
+	    void calculateGrandTotal()
+	    {
+	    	double netAmount=0;
+	    	for(TransactionReport tr:trList)
+	    	{
+	    		netAmount+=tr.getAmount();
+	    	}
+	    	txtNetTotal.setText(""+netAmount);
+	    	txtGst.setText(""+(
+	    			netAmount*1.5/100
+	    			));
+	    	txtCGST.setText(""+(
+	    			netAmount*1.5/100
+	    			));
+	    	txtGrandTotal.setText(""+(
+					Double.parseDouble(txtGst.getText())+
+					Double.parseDouble(txtCGST.getText())+
+					Double.parseDouble(txtNetTotal.getText())-
+					Double.parseDouble(txtDiscount.getText())
+					));
 	    	
 	    }
 	    private boolean isNumber(String num) {

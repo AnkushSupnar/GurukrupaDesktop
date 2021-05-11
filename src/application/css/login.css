@@ -20,5 +20,9 @@
 .buttone:pressed{
 	-fx-background-color:#1de9b6;
 }
-
-
+.buttone .ikonli-font-icon{
+	-fx-icon-color:#1df206;
+}
+.buttone .ikonli-font-icon :hover{
+	-fx-icon-color:#ffffff;
+}
